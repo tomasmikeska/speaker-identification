@@ -9,11 +9,10 @@ from utils import file_listing, dir_listing, last_component, relative_path
 MIXTURE_COMPONENTS = 24
 MAX_ITERS = 300
 NUM_INITS = 10
-
+MODEL_PERSIST_PATH = relative_path('../model/gmm/')
 
 def get_gmm_path(speaker):
-    p = '../model/gmm/speaker%s_%scomps_%smaxiter_%sninit.gmm' % (speaker, MIXTURE_COMPONENTS, MAX_ITERS, NUM_INITS)
-    return relative_path(p)
+    return MODEL_PERSIST_PATH + 'speaker%s_%scomps_%smaxiter_%sninit.gmm' % (speaker, MIXTURE_COMPONENTS, MAX_ITERS, NUM_INITS)
 
 def load_gmm(speaker):
     with open(get_gmm_path(speaker), 'rb') as f:
@@ -21,7 +20,7 @@ def load_gmm(speaker):
     return gmm
 
 def load_models(speakers):
-    if os.path.isfile(get_gmm_path('1')):
+    if len(file_listing(MODEL_PERSIST_PATH, 'gmm')) > 0:
         print('Loading saved GMM models from file')
         return { speaker: load_gmm(speaker) for speaker in speakers }
     else:
@@ -61,13 +60,9 @@ def predict(gmms, file):
 if __name__ == '__main__':
 
     speaker_recordings, speakers = load_local_dataset()
-
-    if os.path.isfile(get_gmm_path('1')):
-        gmm_models = load_models(speakers)
-    else:
-        gmm_models = { speaker: init_gmm() for speaker in set(speakers) }
-        train_gmms(gmm_models)
-        save_gmms(gmm_models)
+    gmm_models = { speaker: init_gmm() for speaker in set(speakers) }
+    train_gmms(gmm_models)
+    save_gmms(gmm_models)
 
     # Calculate precision
     total = 0
