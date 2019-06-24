@@ -13,9 +13,10 @@ def read_wav(filepath):
     freq, audio = wavfile.read(filepath)
     return extract_features(audio, freq)
 
+
 def read_dataset_dir(base_dir):
     dirs = dir_listing(base_dir)
-    X = { last_component(dir): np.empty(OUTPUT_DIM) for dir in dirs }
+    X = {last_component(dir): np.empty(OUTPUT_DIM) for dir in dirs}
 
     for dir_path in dirs:
         for file in file_listing(dir_path, 'wav'):
@@ -25,17 +26,21 @@ def read_dataset_dir(base_dir):
 
     return X
 
+
 def get_speakers(base_dir=DATASET_TRAIN_PATH):
     return set(map(lambda dir_path: last_component(dir_path), dir_listing(base_dir)))
+
 
 def load_data():
     with open(TRAIN_PERSIST_PATH, 'rb') as f:
         data = pickle.load(f)
     return data
 
+
 def save_data(train):
     with open(TRAIN_PERSIST_PATH, 'wb+') as f:
         pickle.dump(train, f)
+
 
 def load_local_dataset():
     if file_exists(TRAIN_PERSIST_PATH):
