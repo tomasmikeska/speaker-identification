@@ -19,26 +19,26 @@ Then put your local dataset into `data` file in project root. Your dataset shoul
 Example:
 ```
 .
-+-- data
-|   +-- train
-|       +-- speaker1
-|           ├── a1.wav
-|           └── a2.wav
-|       +-- speaker2
-|           ├── b1.wav
-|           └── b2.wav
-|       +-- ...
-|   +-- test
-|       +-- speaker1
-|           ├── a1.wav
-|           └── a2.wav
-|       +-- speaker2
-|           ├── b1.wav
-|           └── b2.wav
-|       +-- ...
-|   +-- eval
-|       ├── unknown1.wav
-|       └── unknown2.wav
+└── data
+    ├── train
+    │   ├── speaker1
+    │   │   ├── a1.wav
+    │   │   ├── a2.wav
+    │   ├── speaker2
+    │   │   ├── b1.wav
+    │   │   ├── b2.wav
+    │   └── ...
+    ├── test
+    │   ├── speaker1
+    │   │   ├── a1.wav
+    │   │   ├── a2.wav
+    │   ├── speaker2
+    │   │   ├── b1.wav
+    │   │   ├── b2.wav
+    │   └── ...
+    └── eval
+        ├── unknown1.wav
+        └── ...
 ```
 
 #### Usage
