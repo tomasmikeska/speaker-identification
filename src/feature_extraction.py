@@ -9,11 +9,6 @@ SILENCE_WINDOW_SIZE = 0.0125  # seconds
 OUTPUT_DIM = (0, 24)  # 0 stands for variable length
 
 
-def strip_init_err(s, freq):
-    '''Strip initial recording error - 1.2s'''
-    return s[int(freq * 1.2):]
-
-
 def normalize(x):
     return (x - x.mean()) / (x.max() - x.min())
 
@@ -46,7 +41,6 @@ def mfcc(audio, freq):
 
 
 def extract_features(audio, freq):
-    audio = strip_init_err(audio, freq)
     audio = denoise(audio)
     audio = normalize(audio)
     audio = remove_silence(audio, freq)

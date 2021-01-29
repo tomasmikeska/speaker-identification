@@ -1,5 +1,5 @@
 from os import listdir, makedirs
-from os.path import isfile, isdir, join, exists, dirname
+from os.path import isfile, isdir, join, exists, dirname, sep
 
 
 def file_listing(dir, extension):
@@ -17,7 +17,7 @@ def mkdir(path):
 
 
 def last_component(path):
-    return path.split('/')[-1]
+    return path.split(sep)[-1]
 
 
 def file_exists(path):
